@@ -12,7 +12,13 @@ app.get('/', function (req, res) {
 });
 
 app.get('/api/whoami', function (req, res) {
-  res.json({test: req});
+  const {headers, ip: ipAddress } = req;
+
+  res.json({
+    ipaddress: ipAddress,
+    language: headers['accept-language'],
+    software: headers['user-agent'],
+  });
 });
 
 var listener = app.listen(process.env.PORT || 3000, function () {
